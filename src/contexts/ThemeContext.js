@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 const ThemeContext = createContext({
   theme: "system",
@@ -22,23 +22,23 @@ export const ThemeProvider = ({ children }) => {
   const [mounted, setMounted] = useState(false);
 
   // Get system preference
-  const getSystemTheme = () => {
+  const getSystemTheme = useCallback(() => {
     if (typeof window === "undefined") return "light";
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-  };
+  }, []);
 
   // Resolve the actual theme to apply
-  const resolveTheme = (themeValue) => {
+  const resolveTheme = useCallback((themeValue) => {
     if (themeValue === "system") {
       return getSystemTheme();
     }
     return themeValue;
-  };
+  }, [getSystemTheme]);
 
   // Apply theme to document
-  const applyTheme = (themeValue) => {
+  const applyTheme = useCallback((themeValue) => {
     if (typeof window === "undefined") return;
     
     const resolved = resolveTheme(themeValue);
@@ -47,7 +47,7 @@ export const ThemeProvider = ({ children }) => {
     const root = document.documentElement;
     root.classList.remove("light", "dark");
     root.classList.add(resolved);
-  };
+  }, [resolveTheme]);
 
   // Initialize theme on mount
   useEffect(() => {
@@ -59,7 +59,7 @@ export const ThemeProvider = ({ children }) => {
     
     setTheme(initialTheme);
     applyTheme(initialTheme);
-  }, []);
+  }, [applyTheme]);
 
   // Listen for system theme changes
   useEffect(() => {
@@ -74,7 +74,7 @@ export const ThemeProvider = ({ children }) => {
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, mounted]);
+  }, [theme, mounted, applyTheme]);
 
   // Update theme
   const updateTheme = (newTheme) => {
