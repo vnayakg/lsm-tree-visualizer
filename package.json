@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages --dist out --dotfiles"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",
