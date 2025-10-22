@@ -42,16 +42,23 @@ const Controls = ({
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg mb-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-700">Controls</h2>
+    <div className="p-4 shadow-md rounded-lg mb-6" style={{ 
+      background: 'var(--bg-card)',
+      boxShadow: 'var(--shadow-md)'
+    }}>
+      <h2 className="text-xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Controls</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
         {/* Write/Delete Section */}
-        <div className="space-y-3 p-3 border border-gray-200 rounded-md bg-gray-50">
-          <h3 className="font-medium text-gray-600">Write / Delete Data</h3>
+        <div className="space-y-3 p-3 rounded-md" style={{ 
+          border: '1px solid var(--border-secondary)',
+          background: 'var(--bg-card-secondary)'
+        }}>
+          <h3 className="font-medium" style={{ color: 'var(--text-secondary)' }}>Write / Delete Data</h3>
           <div>
             <label
               htmlFor="key"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
+              style={{ color: 'var(--text-primary)' }}
             >
               Key:
             </label>
@@ -61,13 +68,19 @@ const Controls = ({
               value={key}
               onChange={(e) => setKey(e.target.value)}
               placeholder="Enter key"
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+              className="mt-1 block w-full p-2 rounded-md shadow-sm"
+              style={{ 
+                border: '1px solid var(--border-primary)',
+                background: 'var(--bg-input)',
+                color: 'var(--text-primary)'
+              }}
             />
           </div>
           <div>
             <label
               htmlFor="value"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
+              style={{ color: 'var(--text-primary)' }}
             >
               Value (optional for Delete):
             </label>
@@ -77,19 +90,36 @@ const Controls = ({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder="Enter value"
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+              className="mt-1 block w-full p-2 rounded-md shadow-sm"
+              style={{ 
+                border: '1px solid var(--border-primary)',
+                background: 'var(--bg-input)',
+                color: 'var(--text-primary)'
+              }}
             />
           </div>
           <div className="flex space-x-2">
             <button
               onClick={handleWrite}
-              className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center justify-center transition-colors"
+              className="flex-1 px-4 py-2 rounded-md flex items-center justify-center transition-colors"
+              style={{ 
+                background: 'var(--btn-blue-bg)',
+                color: 'var(--text-inverse)'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--btn-blue-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'var(--btn-blue-bg)'}
             >
               <Edit3 size={18} className="mr-2" /> Write
             </button>
             <button
               onClick={handleDelete}
-              className="flex-1 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 flex items-center justify-center transition-colors"
+              className="flex-1 px-4 py-2 rounded-md flex items-center justify-center transition-colors"
+              style={{ 
+                background: 'var(--btn-red-bg)',
+                color: 'var(--text-inverse)'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--btn-red-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'var(--btn-red-bg)'}
             >
               <Trash2 size={18} className="mr-2" /> Delete
             </button>
@@ -97,12 +127,16 @@ const Controls = ({
         </div>
 
         {/* Read Section */}
-        <div className="space-y-3 p-3 border border-gray-200 rounded-md bg-gray-50">
-          <h3 className="font-medium text-gray-600">Read Data</h3>
+        <div className="space-y-3 p-3 rounded-md" style={{ 
+          border: '1px solid var(--border-secondary)',
+          background: 'var(--bg-card-secondary)'
+        }}>
+          <h3 className="font-medium" style={{ color: 'var(--text-secondary)' }}>Read Data</h3>
           <div>
             <label
               htmlFor="readKey"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium"
+              style={{ color: 'var(--text-primary)' }}
             >
               Key to Read:
             </label>
@@ -112,32 +146,56 @@ const Controls = ({
               value={readKey}
               onChange={(e) => setReadKey(e.target.value)}
               placeholder="Enter key to read"
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+              className="mt-1 block w-full p-2 rounded-md shadow-sm"
+              style={{ 
+                border: '1px solid var(--border-primary)',
+                background: 'var(--bg-input)',
+                color: 'var(--text-primary)'
+              }}
             />
           </div>
           <button
             onClick={handleRead}
-            className="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 flex items-center justify-center transition-colors"
+            className="w-full px-4 py-2 rounded-md flex items-center justify-center transition-colors"
+            style={{ 
+              background: 'var(--btn-green-bg)',
+              color: 'var(--text-inverse)'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--btn-green-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'var(--btn-green-bg)'}
           >
             <Search size={18} className="mr-2" /> Read
           </button>
         </div>
       </div>
       {/* Actions Section */}
-      <div className="mt-4 pt-4 border-t border-gray-200 flex flex-wrap gap-2">
+      <div className="mt-4 pt-4 flex flex-wrap gap-2" style={{ borderTop: '1px solid var(--border-secondary)' }}>
         {" "}
         {/* Use flex-wrap and gap for better responsiveness */}
         <button
           onClick={() => onCompact(0)}
           disabled={isCompacting}
-          className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 disabled:bg-gray-400 flex items-center justify-center transition-colors"
+          className="px-4 py-2 rounded-md flex items-center justify-center transition-colors"
+          style={{ 
+            background: isCompacting ? 'var(--btn-gray-bg)' : 'var(--btn-purple-bg)',
+            color: 'var(--text-inverse)',
+            cursor: isCompacting ? 'not-allowed' : 'pointer'
+          }}
+          onMouseEnter={(e) => !isCompacting && (e.currentTarget.style.background = 'var(--btn-purple-hover)')}
+          onMouseLeave={(e) => !isCompacting && (e.currentTarget.style.background = 'var(--btn-purple-bg)')}
         >
           <Zap size={18} className="mr-2" /> Trigger L0 Compaction
         </button>
         {/* Add button to compact any level later if needed */}
         <button
           onClick={onResetTree}
-          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 flex items-center justify-center transition-colors"
+          className="px-4 py-2 rounded-md flex items-center justify-center transition-colors"
+          style={{ 
+            background: 'var(--btn-gray-bg)',
+            color: 'var(--text-inverse)'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.background = 'var(--btn-gray-hover)'}
+          onMouseLeave={(e) => e.currentTarget.style.background = 'var(--btn-gray-bg)'}
         >
           <RotateCcw size={18} className="mr-2" /> Reset Tree
         </button>

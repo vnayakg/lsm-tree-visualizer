@@ -8,6 +8,7 @@ import MemTableVisualizer from "../components/MemTableVisualizer";
 import LevelVisualizer from "../components/LevelVisualizer";
 import LogPanel from "../components/LogPanel";
 import PerformanceMetrics from "../components/PerformanceMetrics";
+import ThemeToggle from "../components/ThemeToggle";
 import { useLSMPersistence } from "../utils/persistence";
 import {
   TOMBSTONE,
@@ -131,25 +132,28 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans">
+    <div className="min-h-screen p-4 md:p-8 font-sans" style={{ background: 'var(--bg-page)' }}>
       <div className="max-w-7xl mx-auto">
         <header className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-800">
+          <h1 className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>
             LSM Tree Visualization
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
             Watch how a Log-Structured Merge Tree works interactively.
           </p>
         </header>
 
-        <SettingsPanel
-          initialConfig={lsmTreeInstance.config} // Pass current config
-          onSave={handleSaveSettings}
-          onResetDefault={() => {
-            // Reset to hardcoded default values by passing the initialLSMConfig object
-            handleSaveSettings(initialLSMConfig);
-          }}
-        />
+        <div className="mb-4 flex gap-2 items-start">
+          <SettingsPanel
+            initialConfig={lsmTreeInstance.config} // Pass current config
+            onSave={handleSaveSettings}
+            onResetDefault={() => {
+              // Reset to hardcoded default values by passing the initialLSMConfig object
+              handleSaveSettings(initialLSMConfig);
+            }}
+          />
+          <ThemeToggle />
+        </div>
 
         <Controls
           onWrite={handleWrite}
@@ -165,20 +169,25 @@ const App = () => {
         )}
 
         {readValue && (
-          <div className="my-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg shadow animate-fadeIn">
-            <h3 className="text-lg font-semibold text-yellow-800">
+          <div className="my-4 p-4 rounded-lg shadow animate-fadeIn" style={{ 
+            background: 'var(--read-result-bg)', 
+            borderColor: 'var(--read-result-border)',
+            borderWidth: '1px',
+            borderStyle: 'solid'
+          }}>
+            <h3 className="text-lg font-semibold" style={{ color: 'var(--read-result-text)' }}>
               Read Result:
             </h3>
             {readValue.value === undefined && (
-              <p className="text-yellow-700">Key not found.</p>
+              <p style={{ color: 'var(--read-result-text)' }}>Key not found.</p>
             )}
             {readValue.value === TOMBSTONE && (
-              <p className="text-red-700">
+              <p style={{ color: 'var(--dataitem-tombstone-text)' }}>
                 Key found: Marked as DELETED (TOMBSTONE).
               </p>
             )}
             {readValue.value !== undefined && readValue.value !== TOMBSTONE && (
-              <p className="text-yellow-700">
+              <p style={{ color: 'var(--read-result-text)' }}>
                 Key found:{" "}
                 <span className="font-bold">
                   {JSON.stringify(readValue.value)}
@@ -190,7 +199,7 @@ const App = () => {
 
         <div className="mt-6 grid grid-cols-1 xl:grid-cols-3 gap-6">
           <div className="xl:col-span-2">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-3">
+            <h2 className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
               LSM Tree Structure
             </h2>
             <MemTableVisualizer
@@ -213,14 +222,17 @@ const App = () => {
             )}
           </div>
           <div className="xl:col-span-1">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-3">
+            <h2 className="text-2xl font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>
               Operations Log
             </h2>
             <LogPanel logs={treeState.log} />
           </div>
         </div>
 
-        <footer className="mt-12 text-center text-sm text-gray-500 py-6 border-t border-gray-200">
+        <footer className="mt-12 text-center text-sm py-6" style={{ 
+          color: 'var(--text-tertiary)', 
+          borderTop: '1px solid var(--border-secondary)' 
+        }}>
           <p>
             LSM Tree Visualization. Vibe coded with &#10084; by{" "}
             <a href="https://github.com/vnayakg"><u>human</u></a>

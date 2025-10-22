@@ -46,17 +46,21 @@ const PerformanceMetrics = ({ metrics }) => {
   if (!metrics) return null; // Don't render if metrics aren't available
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg mb-6">
+    <div className="p-4 rounded-lg mb-6" style={{ 
+      background: 'var(--bg-card)',
+      boxShadow: 'var(--shadow-md)'
+    }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left text-xl font-semibold text-gray-700 mb-3 flex items-center"
+        className="w-full text-left text-xl font-semibold mb-3 flex items-center"
+        style={{ color: 'var(--text-primary)' }}
       >
         {isOpen ? (
           <ChevronDown size={20} className="mr-2" />
         ) : (
           <ChevronRight size={20} className="mr-2" />
         )}
-        <BarChart2 size={22} className="mr-2 text-indigo-600" /> Performance
+        <BarChart2 size={22} className="mr-2" style={{ color: 'var(--metrics-value-text)' }} /> Performance
         Metrics
       </button>
       {isOpen && (
@@ -64,17 +68,21 @@ const PerformanceMetrics = ({ metrics }) => {
           {metricItems.map((item) => (
             <div
               key={item.label}
-              className="p-3 bg-gray-50 border border-gray-200 rounded-md"
+              className="p-3 rounded-md"
+              style={{ 
+                background: 'var(--bg-card-secondary)',
+                border: '1px solid var(--border-secondary)'
+              }}
             >
               <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium text-gray-600">
+                <h4 className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
                   {item.label}
                 </h4>
                 <Tooltip text={item.tip}>
-                  <HelpCircle size={14} className="text-gray-400 cursor-help" />
+                  <HelpCircle size={14} className="cursor-help" style={{ color: 'var(--text-tertiary)' }} />
                 </Tooltip>
               </div>
-              <p className="text-2xl font-semibold text-indigo-600 mt-1">
+              <p className="text-2xl font-semibold mt-1" style={{ color: 'var(--metrics-value-text)' }}>
                 {item.value}
               </p>
             </div>

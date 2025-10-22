@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Light Theme (Default) */
+:root,
+:root.light {
+  /* Page backgrounds */
+  --bg-page: #f3f4f6;
+  --bg-card: #ffffff;
+  --bg-card-secondary: #f9fafb;
+  --bg-input: #ffffff;
+  
+  /* Text colors */
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-inverse: #ffffff;
+  
+  /* Border colors */
+  --border-primary: #d1d5db;
+  --border-secondary: #e5e7eb;
+  --border-focus: #3b82f6;
+  
+  /* MemTable colors */
+  --memtable-bg: #eff6ff;
+  --memtable-border: #93c5fd;
+  --memtable-text: #1e40af;
+  
+  /* Level colors */
+  --level-0-bg: #f3e8ff;
+  --level-0-border: #c084fc;
+  --level-1-bg: #e0e7ff;
+  --level-1-border: #818cf8;
+  --level-2-bg: #e0f2fe;
+  --level-2-border: #7dd3fc;
+  --level-3-bg: #ccfbf1;
+  --level-3-border: #5eead4;
+  --level-4-bg: #d1fae5;
+  --level-4-border: #6ee7b7;
+  --level-5-bg: #ecfccb;
+  --level-5-border: #bef264;
+  --level-6-bg: #fef3c7;
+  --level-6-border: #fcd34d;
+  
+  /* SSTable colors */
+  --sstable-bg: #f9fafb;
+  --sstable-border: #d1d5db;
+  --sstable-id-bg: #e5e7eb;
+  
+  /* Data item colors */
+  --dataitem-bg: #f3f4f6;
+  --dataitem-border: #d1d5db;
+  --dataitem-key-text: #1d4ed8;
+  --dataitem-value-text: #374151;
+  --dataitem-tombstone-bg: #fee2e2;
+  --dataitem-tombstone-border: #f87171;
+  --dataitem-tombstone-text: #991b1b;
+  
+  /* Log panel colors */
+  --log-bg: #1f2937;
+  --log-text: #f3f4f6;
+  --log-text-secondary: #9ca3af;
+  --log-border: #374151;
+  --log-hover: #374151;
+  
+  /* Status colors */
+  --status-checking-bg: #fef3c7;
+  --status-checking-text: #92400e;
+  --status-checking-ring: #fbbf24;
+  --status-found-bg: #d1fae5;
+  --status-found-text: #065f46;
+  --status-found-ring: #34d399;
+  --status-tombstone-bg: #fee2e2;
+  --status-tombstone-text: #991b1b;
+  
+  /* Read result */
+  --read-result-bg: #fef3c7;
+  --read-result-border: #fcd34d;
+  --read-result-text: #92400e;
+  
+  /* Button colors */
+  --btn-blue-bg: #3b82f6;
+  --btn-blue-hover: #2563eb;
+  --btn-green-bg: #10b981;
+  --btn-green-hover: #059669;
+  --btn-red-bg: #ef4444;
+  --btn-red-hover: #dc2626;
+  --btn-purple-bg: #a855f7;
+  --btn-purple-hover: #9333ea;
+  --btn-yellow-bg: #eab308;
+  --btn-yellow-hover: #ca8a04;
+  --btn-gray-bg: #6b7280;
+  --btn-gray-hover: #4b5563;
+  
+  /* Metrics */
+  --metrics-value-text: #6366f1;
+  
+  /* Tooltip */
+  --tooltip-bg: #374151;
+  --tooltip-text: #ffffff;
+  
+  /* Shadow */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Dark Theme */
+:root.dark {
+  /* Page backgrounds */
+  --bg-page: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-secondary: #334155;
+  --bg-input: #1e293b;
+  
+  /* Text colors */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #0f172a;
+  
+  /* Border colors */
+  --border-primary: #475569;
+  --border-secondary: #334155;
+  --border-focus: #60a5fa;
+  
+  /* MemTable colors */
+  --memtable-bg: #1e3a5f;
+  --memtable-border: #3b82f6;
+  --memtable-text: #93c5fd;
+  
+  /* Level colors */
+  --level-0-bg: #2e1065;
+  --level-0-border: #a78bfa;
+  --level-1-bg: #1e1b4b;
+  --level-1-border: #818cf8;
+  --level-2-bg: #082f49;
+  --level-2-border: #38bdf8;
+  --level-3-bg: #134e4a;
+  --level-3-border: #2dd4bf;
+  --level-4-bg: #064e3b;
+  --level-4-border: #34d399;
+  --level-5-bg: #1a2e05;
+  --level-5-border: #a3e635;
+  --level-6-bg: #422006;
+  --level-6-border: #facc15;
+  
+  /* SSTable colors */
+  --sstable-bg: #334155;
+  --sstable-border: #475569;
+  --sstable-id-bg: #475569;
+  
+  /* Data item colors */
+  --dataitem-bg: #334155;
+  --dataitem-border: #475569;
+  --dataitem-key-text: #60a5fa;
+  --dataitem-value-text: #cbd5e1;
+  --dataitem-tombstone-bg: #450a0a;
+  --dataitem-tombstone-border: #ef4444;
+  --dataitem-tombstone-text: #fca5a5;
+  
+  /* Log panel colors */
+  --log-bg: #0c1220;
+  --log-text: #f1f5f9;
+  --log-text-secondary: #64748b;
+  --log-border: #1e293b;
+  --log-hover: #1e293b;
+  
+  /* Status colors */
+  --status-checking-bg: #422006;
+  --status-checking-text: #fde68a;
+  --status-checking-ring: #facc15;
+  --status-found-bg: #064e3b;
+  --status-found-text: #6ee7b7;
+  --status-found-ring: #10b981;
+  --status-tombstone-bg: #450a0a;
+  --status-tombstone-text: #fca5a5;
+  
+  /* Read result */
+  --read-result-bg: #422006;
+  --read-result-border: #ca8a04;
+  --read-result-text: #fde68a;
+  
+  /* Button colors - slightly adjusted for dark mode */
+  --btn-blue-bg: #2563eb;
+  --btn-blue-hover: #1d4ed8;
+  --btn-green-bg: #059669;
+  --btn-green-hover: #047857;
+  --btn-red-bg: #dc2626;
+  --btn-red-hover: #b91c1c;
+  --btn-purple-bg: #9333ea;
+  --btn-purple-hover: #7e22ce;
+  --btn-yellow-bg: #ca8a04;
+  --btn-yellow-hover: #a16207;
+  --btn-gray-bg: #4b5563;
+  --btn-gray-hover: #374151;
+  
+  /* Metrics */
+  --metrics-value-text: #818cf8;
+  
+  /* Tooltip */
+  --tooltip-bg: #1e293b;
+  --tooltip-text: #f1f5f9;
+  
+  /* Shadow - darker shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-page);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

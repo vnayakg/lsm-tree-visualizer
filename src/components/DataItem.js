@@ -12,19 +12,25 @@ const DataItem = ({ itemKey, itemValue, highlight }) => {
 
   return (
     <div
-      className={`px-2 py-1 border rounded-md text-xs transition-all duration-500 ease-in-out transform ${
+      className={`px-2 py-1 rounded-md text-xs transition-all duration-500 ease-in-out transform ${
         mounted ? "opacity-100 scale-100" : "opacity-0 scale-90"
-      } ${
-        isTombstone
-          ? "border-red-400 bg-red-100"
-          : "border-gray-300 bg-gray-100"
-      } ${highlight ? "ring-2 ring-blue-500 shadow-lg" : ""}`}
+      }`}
+      style={{
+        border: isTombstone 
+          ? '1px solid var(--dataitem-tombstone-border)' 
+          : '1px solid var(--dataitem-border)',
+        background: isTombstone 
+          ? 'var(--dataitem-tombstone-bg)' 
+          : 'var(--dataitem-bg)',
+        boxShadow: highlight ? '0 0 0 2px var(--border-focus), var(--shadow-lg)' : 'none'
+      }}
     >
-      <span className="font-semibold text-blue-700 break-all">{itemKey}:</span>
+      <span className="font-semibold break-all" style={{ color: 'var(--dataitem-key-text)' }}>{itemKey}:</span>
       <span
-        className={`${
-          isTombstone ? "text-red-700 italic" : "text-gray-700"
-        } break-all`}
+        className={`break-all ${isTombstone ? "italic" : ""}`}
+        style={{ 
+          color: isTombstone ? 'var(--dataitem-tombstone-text)' : 'var(--dataitem-value-text)'
+        }}
       >
         {isTombstone ? " (TOMBSTONE)" : ` ${itemValue}`}
       </span>

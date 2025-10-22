@@ -10,7 +10,13 @@ const Tooltip = ({ text, children }) => {
     >
       {children}
       {visible && (
-        <div className="absolute z-50 bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-lg shadow-sm whitespace-nowrap">
+        <div 
+          className="absolute z-50 bottom-full mb-2 left-1/2 transform -translate-x-1/2 px-3 py-2 text-sm font-medium rounded-lg shadow-sm whitespace-nowrap"
+          style={{ 
+            background: 'var(--tooltip-bg)',
+            color: 'var(--tooltip-text)'
+          }}
+        >
           {text}
         </div>
       )}

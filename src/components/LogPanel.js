@@ -13,10 +13,15 @@ const LogPanel = ({ logs }) => {
   }, [logs, isOpen]); // Rerun when logs or isOpen state changes
 
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg">
+    <div className="p-4 rounded-lg" style={{ 
+      background: 'var(--log-bg)', 
+      color: 'var(--log-text)',
+      boxShadow: 'var(--shadow-lg)'
+    }}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left font-semibold text-gray-100 mb-2 flex items-center"
+        className="w-full text-left font-semibold mb-2 flex items-center"
+        style={{ color: 'var(--log-text)' }}
       >
         {isOpen ? (
           <ChevronDown size={20} className="mr-1" />
@@ -28,18 +33,22 @@ const LogPanel = ({ logs }) => {
       {isOpen && (
         <div
           ref={logContainerRef}
-          className="h-60 overflow-y-auto space-y-1 text-sm font-mono border-t border-gray-700 pt-2"
+          className="h-60 overflow-y-auto space-y-1 text-sm font-mono pt-2"
+          style={{ borderTop: '1px solid var(--log-border)' }}
         >
           {logs.length === 0 && (
-            <p className="text-gray-400 italic">No activities yet.</p>
+            <p className="italic" style={{ color: 'var(--log-text-secondary)' }}>No activities yet.</p>
           )}
           {logs.map((log, index) => (
             <div
               key={index}
-              className="whitespace-pre-wrap hover:bg-gray-700 px-1 rounded"
+              className="whitespace-pre-wrap px-1 rounded transition-colors"
+              style={{ cursor: 'default' }}
+              onMouseEnter={(e) => e.currentTarget.style.background = 'var(--log-hover)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
             >
-              <span className="text-gray-400 select-none">{log.time}</span>:{" "}
-              <span className="text-gray-200">{log.text}</span>
+              <span className="select-none" style={{ color: 'var(--log-text-secondary)' }}>{log.time}</span>:{" "}
+              <span style={{ color: 'var(--log-text)' }}>{log.text}</span>
             </div>
           ))}
         </div>
